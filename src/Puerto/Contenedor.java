@@ -82,4 +82,18 @@ public class Contenedor {
     public void setInspeccion(boolean inspeccion) {
         this.inspeccion = inspeccion;
     }
+
+    @Override
+    public String toString() {
+        return "Contenedor{" +
+                "ID=" + id +
+                ", Peso=" + peso +
+                ", Prioridad=" + prio +
+                ", Procedencia='" + procedencia + '\'' +
+                ", Descripcion='" + descripcion + '\'' +
+                ", Empresa emisora='" + nomEnvia + '\'' +
+                ", Empresa Receptora='" + nomRecibe + '\'' +
+                ", ¿Ha sido inspeccionado?=" + inspeccion +
+                '}';
+    }
 }
