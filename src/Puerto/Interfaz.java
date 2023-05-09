@@ -1,20 +1,18 @@
 package Puerto;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
-public class Interfaz {
+public class Interfaz extends JFrame {
+    private JPanel panelPrincipal;
     private JTextField TextoID;
     private JTextField TextoPeso;
-    private JTextField TextoPais;
     private JButton BCrear;
     private JButton BMostrar;
     private JTextField TextoEmisor;
     private JTextField TextoDesc;
     private JTextField TextoReceptor;
-    private JCheckBox AduanaSi;
-    private JCheckBox AduanaNO;
+    private JCheckBox Aduana;
     private JLabel TIdentificador;
     private JLabel TPeso;
     private JLabel TPais;
@@ -25,12 +23,41 @@ public class Interfaz {
     private JLabel TAduana;
     private JTextField TextoMostrar;
     private JTextField TextoPrio;
+    private JLabel Hub;
+    private JComboBox ComboPais;
+    private JComboBox ComboHub;
+    private JRadioButton RB1;
+    private JRadioButton RB2;
+    private JRadioButton RB3;
+    private JTextArea TArea;
+    private JTextField TID;
+    private JButton BDesapilar;
+    private JButton BApilar;
+    private JTextField TextoDesapi;
+    private JLabel TOperaciones;
+    private JButton BContar;
+    private JComboBox ComboContar;
 
+    // Atributos Contenedor
     int id, peso, prio;
     String pais, emi, recep, descr;
     boolean inspeccion;
+    Hub hub = new Hub();
+    Contenedor contenedor;
+
+    // Atributos
+    int col, identificador, nPuerto;
+    String paisContar;
 
     public Interfaz() {
+
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setTitle("Puerto");
+        this.setSize(800, 600);
+        setVisible(true);
+        this.add(panelPrincipal);
+
+        /** Textos */
         TextoID.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -41,12 +68,6 @@ public class Interfaz {
             @Override
             public void actionPerformed(ActionEvent e) {
                 peso = Integer.parseInt(TextoPeso.getText());
-            }
-        });
-        TextoPais.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                pais = TextoPais.getText();
             }
         });
         TextoEmisor.addActionListener(new ActionListener() {
@@ -67,46 +88,119 @@ public class Interfaz {
                 descr = TextoDesc.getText();
             }
         });
-        AduanaSi.addActionListener(new ActionListener() {
+        TID.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                inspeccion = true;
+                identificador = Integer.parseInt(TID.getText());
             }
         });
-        AduanaNO.addActionListener(new ActionListener() {
+        TextoDesapi.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                inspeccion = false;
+                col = Integer.parseInt(TextoDesapi.getText());
             }
         });
 
-
-        TextoPrio.addActionListener(new ActionListener() {
+        /** Check Box */
+        Aduana.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                prio = Integer.parseInt(TextoPrio.getText());
+                if (Aduana.isSelected()) {
+                    inspeccion = true;
+                } else inspeccion = false;
             }
         });
-        TextoMostrar.addActionListener(new ActionListener() {
+
+        /** Radio Buttons */
+        RB1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (TextoMostrar == null) {
-                    Puerto p = p.toString();
+                if (RB1.isSelected()) {
+                    RB2.setSelected(false);
+                    RB3.setSelected(false);
                 }
             }
         });
+        RB2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (RB2.isSelected()) {
+                    RB1.setSelected(false);
+                    RB3.setSelected(false);
+                }
+            }
+        });
+        RB3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (RB3.isSelected()) {
+                    RB1.setSelected(false);
+                    RB2.setSelected(false);
+                }
+            }
+        });
+
+        /** Buttons */
         BCrear.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Contenedor c = new Contenedor(id, peso, prio, inspeccion, pais, descr, recep, emi);
+                contenedor = new Contenedor(id, peso, prio, inspeccion, pais, descr, recep, emi);
 
             }
         });
+
         BMostrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                hub.contenedor(identificador);
+            }
+        });
+        BApilar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                hub.apilar(contenedor);
 
             }
         });
+        BDesapilar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                hub.desapilar(col);
+            }
+        });
+        BContar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                hub.npais(paisContar);
+            }
+        });
+
+        /** ComboBox */
+        ComboPais.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                paisContar = ComboPais.getSelectedItem().toString();
+            }
+        });
+        ComboHub.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                nPuerto = Integer.parseInt(ComboHub.getSelectedItem().toString());
+            }
+        });
+        ComboContar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pais = ComboPais.getSelectedItem().toString();
+            }
+        });
+
+
+
+
+
+
+
+
     }
 }
