@@ -190,7 +190,7 @@ public class Interfaz extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 contenedor = new Contenedor(id, peso, prio, inspeccion, pais, descr, recep, emi);
-                TArea.setText("Contenedor añadido");
+                TArea.setText("Contenedor creado");
 
 
             }
@@ -212,7 +212,7 @@ public class Interfaz extends JFrame {
 
                 if (apilado){
                     VentanaResultado ventanaResultado = new VentanaResultado(contenedor);
-                    TArea.append("Contenedor añadido");
+
 
                 }else{
                     TArea.setText("No se ha podido apilar el contenedor");
