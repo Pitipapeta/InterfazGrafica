@@ -1,7 +1,5 @@
 package Puerto;
 
-import javax.naming.ContextNotEmptyException;
-
 public class Contenedor {
     private final int id;
     private int peso, prio;
@@ -14,13 +12,13 @@ public class Contenedor {
     public Contenedor(int id, int peso, int prio, boolean inspeccion, String procedencia, String descripcion, String nomRecibe, String nomEnvia){
         this(id);
 
-        if(peso>0) this.peso=peso;
-        if(prio>0 && prio<4) this.prio=prio;
-        this.inspeccion=inspeccion;
-        if(procedencia!=null) this.procedencia=procedencia;
-        if(descripcion!=null) this.descripcion=descripcion;
-        if(nomEnvia!=null) this.nomEnvia=nomEnvia;
-        if(nomRecibe!=null) this.nomRecibe=nomRecibe;
+        if(peso>0) this.peso = peso;
+        if(prio>0 && prio<4) this.prio = prio;
+        this.inspeccion = inspeccion;
+        if(procedencia!=null) this.procedencia = procedencia;
+        if(descripcion!=null) this.descripcion = descripcion;
+        if(nomEnvia!=null) this.nomEnvia = nomEnvia;
+        if(nomRecibe!=null) this.nomRecibe = nomRecibe;
     }
 
     public int getId() {
@@ -85,15 +83,14 @@ public class Contenedor {
 
     @Override
     public String toString() {
-        return "Contenedor{" +
-                "ID=" + id +
-                ", Peso=" + peso +
-                ", Prioridad=" + prio +
-                ", Procedencia='" + procedencia + '\'' +
-                ", Descripcion='" + descripcion + '\'' +
-                ", Empresa emisora='" + nomEnvia + '\'' +
-                ", Empresa Receptora='" + nomRecibe + '\'' +
-                ", ¿Ha sido inspeccionado?=" + inspeccion +
-                '}';
+        return "Contenedor: " +
+                "ID:" + id + "\n" +
+                ", Peso: " + peso + "\n" +
+                ", Prioridad: " + prio + "\n" +
+                ", Procedencia: " + procedencia + "\n" +
+                ", Descripcion: " + descripcion + "\n" +
+                ", Empresa emisora: " + nomEnvia + "\n" +
+                ", Empresa Receptora: " + nomRecibe + "\n" +
+                ", ¿Ha sido inspeccionado? " + inspeccion;
     }
 }

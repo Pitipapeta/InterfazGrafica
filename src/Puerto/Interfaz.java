@@ -25,7 +25,6 @@ public class Interfaz extends JFrame {
     private JTextField TextoPrio;
     private JLabel Hub;
     private JComboBox ComboPais;
-    private JComboBox ComboHub;
     private JRadioButton RB1;
     private JRadioButton RB2;
     private JRadioButton RB3;
@@ -37,13 +36,19 @@ public class Interfaz extends JFrame {
     private JLabel TOperaciones;
     private JButton BContar;
     private JComboBox ComboContar;
+    private JButton bMatriz;
+    private JRadioButton RB4;
+    private JRadioButton RB6;
+    private JRadioButton RB5;
+    private JTextField TextoContar;
 
     // Atributos Contenedor
-    int id, peso, prio;
+    int id, peso, prio, contador;
     String pais, emi, recep, descr;
     boolean inspeccion;
     Hub hub = new Hub();
     Contenedor contenedor;
+    Puerto puerto;
 
     // Atributos
     int col, identificador, nPuerto;
@@ -53,9 +58,10 @@ public class Interfaz extends JFrame {
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Puerto");
-        this.setSize(800, 600);
+        this.setSize(1000, 750);
         setVisible(true);
         this.add(panelPrincipal);
+        puerto = new Puerto();
 
         /** Textos */
         TextoID.addActionListener(new ActionListener() {
@@ -100,6 +106,12 @@ public class Interfaz extends JFrame {
                 col = Integer.parseInt(TextoDesapi.getText());
             }
         });
+        TextoContar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TextoContar.setText("" + contador);
+            }
+        });
 
         /** Check Box */
         Aduana.addActionListener(new ActionListener() {
@@ -119,6 +131,7 @@ public class Interfaz extends JFrame {
                     RB2.setSelected(false);
                     RB3.setSelected(false);
                 }
+                prio = Integer.parseInt(RB1.getText());
             }
         });
         RB2.addActionListener(new ActionListener() {
@@ -128,6 +141,7 @@ public class Interfaz extends JFrame {
                     RB1.setSelected(false);
                     RB3.setSelected(false);
                 }
+                prio = Integer.parseInt(RB2.getText());
             }
         });
         RB3.addActionListener(new ActionListener() {
@@ -137,6 +151,37 @@ public class Interfaz extends JFrame {
                     RB1.setSelected(false);
                     RB2.setSelected(false);
                 }
+                prio = Integer.parseInt(RB3.getText());
+            }
+        });
+        RB4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (RB4.isSelected()) {
+                    RB5.setSelected(false);
+                    RB6.setSelected(false);
+                }
+                nPuerto = Integer.parseInt(RB4.getText());
+            }
+        });
+        RB5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (RB5.isSelected()) {
+                    RB4.setSelected(false);
+                    RB6.setSelected(false);
+                }
+                nPuerto = Integer.parseInt(RB5.getText());
+            }
+        });
+        RB6.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (RB6.isSelected()) {
+                    RB4.setSelected(false);
+                    RB5.setSelected(false);
+                }
+                nPuerto = Integer.parseInt(RB6.getText());
             }
         });
 
@@ -145,6 +190,8 @@ public class Interfaz extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 contenedor = new Contenedor(id, peso, prio, inspeccion, pais, descr, recep, emi);
+                TArea.setText("Contenedor añadido");
+
 
             }
         });
@@ -152,26 +199,50 @@ public class Interfaz extends JFrame {
         BMostrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                hub.contenedor(identificador);
+                if(id == identificador){
+                    TArea.setText(contenedor.toString());
+                }else TArea.setText("Contenedor no encontrado");
             }
         });
         BApilar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                hub.apilar(contenedor);
+
+                boolean apilado = hub.apilar(contenedor);
+
+                if (apilado){
+                    VentanaResultado ventanaResultado = new VentanaResultado(contenedor);
+                    TArea.append("Contenedor añadido");
+
+                }else{
+                    TArea.setText("No se ha podido apilar el contenedor");
+                }
 
             }
         });
         BDesapilar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                hub.desapilar(col);
+
+                boolean apilado = hub.desapilar(col);
+
+                if (apilado){
+                    TArea.setText("Columna desapilada" + contenedor.toString());
+                }else{
+                    TArea.setText("No se ha podido desapilar la columna");
+                }
             }
         });
         BContar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                hub.npais(paisContar);
+                contador = hub.npais(paisContar);
+            }
+        });
+        bMatriz.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TArea.setText(puerto.toString());
             }
         });
 
@@ -179,28 +250,16 @@ public class Interfaz extends JFrame {
         ComboPais.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                paisContar = ComboPais.getSelectedItem().toString();
-            }
-        });
-        ComboHub.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                nPuerto = Integer.parseInt(ComboHub.getSelectedItem().toString());
-            }
-        });
-        ComboContar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+
                 pais = ComboPais.getSelectedItem().toString();
             }
         });
 
-
-
-
-
-
-
+        ComboContar.addActionListener(new ActionListener() {
+            @Override public void actionPerformed (ActionEvent e){
+                paisContar = ComboContar.getSelectedItem().toString();
+            }
+        });
 
     }
 }
