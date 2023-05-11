@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="InterfazGrafica:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/InterfazGrafica_jar</output-path>
+    <root id="archive" name="InterfazGrafica.jar">
+      <element id="module-output" name="InterfazGrafica" />
+      <element id="dir-copy" path="$PROJECT_DIR$/../CodigoInterfaz" />
+    </root>
+  </artifact>
+</component>
