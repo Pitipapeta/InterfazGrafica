@@ -1,5 +1,9 @@
 package Puerto;
 
+import Paquete.Contenedor;
+import Paquete.Hub;
+import Paquete.Puerto;
+
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -41,12 +45,13 @@ public class Interfaz extends JFrame {
     private JRadioButton RB6;
     private JRadioButton RB5;
     private JTextField TextoContar;
+    private JButton BContenedorBAse;
 
     // Atributos Contenedor
     int id, peso, prio, contador;
     String pais, emi, recep, descr;
     boolean inspeccion;
-    Hub hub = new Hub();
+    Paquete.Hub hub = new Hub();
     Contenedor contenedor;
     Puerto puerto;
 
@@ -246,6 +251,13 @@ public class Interfaz extends JFrame {
             }
         });
 
+        BContenedorBAse.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TArea.setText(puerto.contenedorBase(prio));
+            }
+        });
+
         /** ComboBox */
         ComboPais.addActionListener(new ActionListener() {
             @Override
@@ -260,6 +272,7 @@ public class Interfaz extends JFrame {
                 paisContar = ComboContar.getSelectedItem().toString();
             }
         });
+
 
     }
 }

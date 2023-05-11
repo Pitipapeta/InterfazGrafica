@@ -9,17 +9,17 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
       <library>
-        <CLASSES />
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../CodigoInterfaz/out/artifacts/CodigoInterfaz_jar/CodigoInterfaz.jar!/" />
+        </CLASSES>
         <JAVADOC />
-        <SOURCES>
-          <root url="file://$MODULE_DIR$/../CodigoInterfaz/src" />
-        </SOURCES>
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../CodigoInterfaz/out/artifacts/CodigoInterfaz_jar/CodigoInterfaz.jar!/" />
+          <root url="jar://$USER_HOME$/Desktop/Parcial/out/artifacts/Desktop_jar/Desktop.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

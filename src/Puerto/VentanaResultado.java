@@ -1,5 +1,7 @@
 package Puerto;
 
+import Paquete.Contenedor;
+
 import javax.swing.*;
 
 public class VentanaResultado extends JFrame {
