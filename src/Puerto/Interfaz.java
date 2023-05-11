@@ -272,7 +272,5 @@ public class Interfaz extends JFrame {
                 paisContar = ComboContar.getSelectedItem().toString();
             }
         });
-
-
     }
 }
